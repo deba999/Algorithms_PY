@@ -1,0 +1,67 @@
+#Bubble Sort
+'''
+1.This is what gives bubble sort its name: the largest numbers begin to “bubble up” to the end of the list, where they belong.
+
+2.After x iterations, checking the last x elements in a collection is redundant.
+
+3.In general, given a collection of n unsorted elements, it takes (n-1) iterations through the list in order to sort it using the bubble sort algorithm.
+
+4.We know that we must make n number of iterations through an array of n total elements in order to sort it. 
+  We also know that, within each iteration, we must check all n elements in the array.
+  
+5.Time complexity : O(n²).
+  Space Complexity : O(1)
+  
+  Case 1) O(n) (Best case) 
+  This time complexity can occur if the array is already sorted, and that means that no swap occurred and only 1 iteration of n elements
+
+  Case 2) O(n^2) (Worst case) 
+  The worst case is if the array is already sorted but in descending order. This means that in the first iteration it would have to look   at n elements, then after that it would look n - 1 elements (since the biggest integer is at the end) and so on and so forth till 1     comparison occurs. 
+  Big-O = n + n - 1 + n - 2 ... + 1 = (n*(n + 1))/2 = O(n^2)
+  
+  Case 3) Average Time Complexity [Big-theta]: O(n^2)
+  
+6.in-place stable comparsion sort type  internal
+
+'''
+
+def bubble(a,n):
+    for i in range(n-2):
+        flag=0
+
+        for j in range(n-i-1):
+            if a[j]>a[j+1]:
+                a[j],a[j+1]=a[j+1],a[j]
+                flag=1
+
+        if flag==0:
+            break
+
+    return a
+
+
+
+arr=[98,22,1,7,44,290,67,8]
+
+print(bubble(arr,len(arr)))
+
+##############################################################
+#Recursive Bubble Sort
+
+def bubble(a,n):
+    // Base case 
+    if n==1:
+        return
+    // One pass of bubble sort. After  this pass, the largest element is moved (or bubbled) to end. 
+    for j in range(n-1):
+            if a[j]>a[j+1]:
+                a[j],a[j+1]=a[j+1],a[j]
+                flag=1
+    // Largest element is fixed, 
+    // recur for remaining array 
+    bubble(a,n-1)
+
+    
+    
+  
+
