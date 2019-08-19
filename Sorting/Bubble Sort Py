@@ -21,6 +21,9 @@
   
   Case 3) Average Time Complexity [Big-theta]: O(n^2)
   
+  Hence no. of comapriosns : n^2 (Refer worst case analysis)
+        no. of swaps : n^2
+        
 6.in-place stable comparsion sort type  internal
 
 '''
