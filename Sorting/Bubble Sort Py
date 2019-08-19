@@ -26,6 +26,11 @@
         
 6.in-place stable comparsion sort type  internal
 
+7. In Bubble sort, we can identify whether list is sorted or not in 1st iteration but in Selection sort we can't able to identify that.
+   Compared to Selection sort, Bubble sort should be used when the given array is almost sorted. 
+
+
+
 '''
 
 def bubble(a,n):
