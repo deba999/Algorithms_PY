@@ -1,0 +1,45 @@
+
+#selection Sort
+'''
+A selection sort algorithm will divide its input list into a sorted and an unsorted section.
+A selection sort algorithm will swap the smallest element it finds in each iteration, and add it to the sorted section of elements.
+we’re selecting one item at a time by its size, and moving it to its correct, “sorted” location. 
+
+1.assuming the first element to be the minimum of the unsorted array,finds the minimum element and swaps
+
+2.To find the minimum element from the array of n  elements,  n-1 comparisons are required. 
+  After putting the minimum element in its proper position, the size of an unsorted array reduces to n-1 and 
+  then n-2 comparisons are required to find the minimum in the unsorted array.
+
+	Therefore  n-1+n-2+n-3... +1 =n(n-1)/2 comparisons and n  swaps result in the overall complexity of .O(n^2)
+
+3. Comparisons — C(n) sorting through n number of elements, it has to perform n-1 passes,then n-2 ans so on,hence n^2
+   Moves — M(n)   in some scenarios, every single item in the list has to be reordered and moved. in the worst case, 
+                  the potential number of times that selection sort has to move (or swap) elements in the process of reordered corresponds directly to the number of elements in the dataset. In other words, 
+				  the potential move count for this algorithm ends up being n, where n is the number of total elements to be sorted in the dataset.
+
+4 . n^2  in-place unstable internal comaprsion type
+
+5. If we have a system where write operations are extremely expensive and read operations are not, then Selection sort could be ideal.
+   Selection sort is good for sorting arrays of small size.
+   Selection sort is better than Bubble sort due to less swapping required.
+'''
+def selection(a,n):
+    for i in range(n-1):  
+        m=i
+        
+        for j in range(i+1,n):
+            if a[m]> a[j]:
+                m=j
+                
+        if m!=i:
+            a[i],a[m]=a[m],a[i]
+        
+    return a
+
+
+
+
+arr=[98,22,1,7,44,290,67,8]
+
+print(selection(arr,len(arr)))
