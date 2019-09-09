@@ -1,0 +1,50 @@
+#find the pair that is closest to k
+def minAbsSumPair(arr, n,k) :
+    #arr.sort()
+
+    l=0;r=n-1
+    minl=0;minr=0
+
+    diff=100000000
+    s=0
+
+    while l<r:
+        s=arr[l]+arr[r]
+
+        if abs(k-s) < diff:
+            diff=abs(k-s)
+            minl=l
+            minr=r
+        elif s<=k:
+            l+=1
+        else:
+            r-=1
+    print('pair is :',arr[minl],arr[minr])
+
+
+def closeto0(arr,n):
+    arr.sort()
+    l=0
+    r=n-1
+    s=0
+    diff=100000
+    minl=minr=0
+
+
+    while l<r:
+        s=arr[l]+arr[r]
+        if abs(s)<abs(diff):
+            diff=s
+            minl=l
+            minr=r
+        if s<0:
+            l+=1
+        else:
+            r-=1
+    print('pair is :',arr[minl],arr[minr])
+    
+arr = [1, 60, -10, 70, -80, 85]
+n = len(arr)
+k=101
+minAbsSumPair(arr, n,k) 
+closeto0(arr,n)
