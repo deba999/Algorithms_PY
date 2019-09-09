@@ -1,0 +1,71 @@
+***************Count pairs with given sum*************
+def getPairsCount(arr, n, sum): 
+      
+    count = 0 # Initialize result 
+  
+    # Consider all possible pairs 
+    # and check their sums 
+    for i in range(0, n): 
+        for j in range(i + 1, n): 
+            if arr[i] + arr[j] == sum: 
+                count += 1
+      
+    return count 
+
+
+def count(arr,n,k):
+    c=0
+    d={}
+    
+    for i in arr:
+        d.setdefault(i,0)
+        d[i]+=1
+        
+    for i in arr:
+        if k-i in d:
+            c+=d[k-i]
+            
+            #To make sure : current element not counted twice
+            if k-i==i:
+                c-=1
+    #as every element will be cvounted twice
+    return c//2
+    
+    
+   
+   *********Print all pairs with given sum************
+   def printAllPairs(arr,n,k):
+    c=0
+    d={}
+    
+    for i in arr:
+        d.setdefault(i,0)
+        d[i]+=1
+        x=k-i
+        if x in d:
+            print(i,x)
+   
+   ************Check if there exist two elements in an array whose sum is equal to the sum of rest of the array*****
+   1- Find the sum of whole array. Let this sum be “sum”
+2- If sum is odd, return false.
+3- Find a pair with sum equals to “sum/2” using hashing based method discussed here as method 2. If a pair is found, print it and return true.
+4- If no pair exists, return false.
+
+   def printAllPairs(arr,n):
+    c=0
+    d={}
+
+    s=sum(arr)
+    if s%2 !=0:
+        print('Not Possible')
+        return
+    s=s//2
+    for i in arr:
+        x=s-i
+        
+        if x in d:
+            print(i,x)
+
+        if i not in d:
+            d[i]=d.get(i,0)+1
+
