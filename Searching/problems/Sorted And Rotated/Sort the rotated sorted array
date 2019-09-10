@@ -1,0 +1,64 @@
+'''
+ 1. First find the split point where the sorting breaks  : index of minimum element
+ 2. Then call the reverse function in three steps.
+     - From zero index to split index.
+     - From split index to end index.
+     - From zero index to end index.
+'''
+#find the minium index
+def searchMin(arr,n):
+    l=0
+    h=n-1
+
+    while l<=h:
+        m=(l+h)//2
+        if m< h and arr[m]>arr[m+1]:
+            return m+1
+        if l<h and arr[m-1]>arr[m]:
+            return  m
+        elif arr[l]<arr[m]:
+                l=m+1
+        else:
+                h=m-1
+
+    print('Not Found...')
+
+#############################MEthod1
+def reverse1(arr,n,k):
+    #0 to split index :reverse
+    x=arr[0:k]
+    x.reverse()
+    print(x)
+    
+    y=arr[k:n]
+    y.reverse()
+    print(y)
+
+    z=x+y
+    z.reverse()
+    
+    return z
+
+####################   method2
+def reverse2(arr,n,k):
+    for i in range(n-1):
+        if arr[i]>arr[i+1]:
+            rev(arr,0,k-1)
+            rev(arr,k,n-1)
+            rev(arr,0,n-1)
+    return arr
+
+def rev(arr,i,j):
+    while i<j:
+        arr[i],arr[j]=arr[j],arr[i]
+        i+=1
+        j-=1
+
+
+arr=[2,3,4,1,2]
+n=len(arr)
+k=searchMin(arr,n)
+print(k)
+
+arr=reverse2(arr,n,k)
+print(arr)
