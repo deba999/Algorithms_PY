@@ -1,0 +1,49 @@
+
+'''
+If someone asks for the number of times it is rorated
+r= index of min 
+ = index of max + 1
+'''
+
+##############################Find the pivolt elemeent or maxium element
+def searchMax(arr,n):
+    l=0
+    h=n-1
+
+    while l<=h:
+        m=(l+h)//2
+        if m< h and arr[m]>arr[m+1]:
+            print('Found , ',arr[m])
+            return
+        if l<h and arr[m-1]>arr[m]:
+            print(arr[m-1])
+            return
+        
+        elif arr[l]<arr[m]:
+                l=m+1
+        else:
+                h=m-1
+
+    print('Not Found...')
+################################Find the minmium element 
+'''
+For recusrion : if l>h return -1 and if l==h return arr[l] ..rest are same
+def searchMin(arr,n):
+    l=0
+    h=n-1
+
+    while l<=h:
+        m=(l+h)//2
+        if m< h and arr[m]>arr[m+1]:
+            print('Found , ',arr[m+1])
+            return
+        if l<h and arr[m-1]>arr[m]:
+            print(arr[m])
+            return
+        
+        elif arr[l]<arr[m]:
+                l=m+1
+        else:
+                h=m-1
+
+    print('Not Found...')
