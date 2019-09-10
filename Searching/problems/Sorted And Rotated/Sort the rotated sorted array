@@ -1,3 +1,12 @@
+
+*** HOW TO  ROATTE AN ARRAY ***
+1. store the first eleent in temp and rorate the araay one by one and append the temp in last pos
+2. let the number of rotation be d   arr=[1,2,3,4,5] d=2
+   2.1 reverse arr[0:d-1] : arr=[2,1,   3,4,5]
+   2.2 reverse arr[d:n]   : arr=[2,1,   5,4,3]
+   2.3 reverse the whole array : arr[3,4,5,  1,2]
+
+
 '''
  1. First find the split point where the sorting breaks  : index of minimum element
  2. Then call the reverse function in three steps.
