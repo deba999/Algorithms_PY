@@ -6,7 +6,18 @@
    2.2 reverse arr[d:n]   : arr=[2,1,   5,4,3]
    2.3 reverse the whole array : arr[3,4,5,  1,2]
 
+***** To check wheathe an array is sorted and rorated***
+Approach:
 
+Find the minimum element in the array.
+Now, if the array is sorted and then rotated then all the elements before minimum element will be in increasing order and all elements after the minimum element will also be in increasing order.
+Check if all elements before minimum element are in increasing order.
+Check if all elements before minimum element are in increasing order.
+Check if the last element of the array is smaller than the element just before the minimum element.
+If all of the above three condition satisfies then print YES otherwise print NO.
+
+
+## Sort the rorated sorted array
 '''
  1. First find the split point where the sorting breaks  : index of minimum element
  2. Then call the reverse function in three steps.
