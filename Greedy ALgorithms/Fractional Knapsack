@@ -1,0 +1,46 @@
+
+Given weights and values of n items, we need to put these items in a knapsack of capacity W to get the maximum total value in the knapsack.
+
+An efficient solution is to use Greedy approach. The basic idea of the greedy approach is to calculate the ratio value/weight for each item and sort the item on basis of this ratio. Then take the item with the highest ratio and add them until we can’t add the next item as a whole and at the end add the next item as much as we can. Which will always be the optimal solution to this problem.
+
+
+
+
+
+
+
+#Fractional Knapsack
+'''
+Sample Input:
+3 50
+60 20
+100 50
+120 30
+Sample Output:
+180.000
+
+'''
+
+tc,W=map(int,input().split())
+arr=[]
+for _ in range(tc):
+    v,w=map(int,input().split())
+    arr.append((v,w,v/w))
+
+sort=sorted(arr,key=lambda x:x[2],reverse=True)
+tv=0
+added=[]  #Adding the quantity or fraction
+
+for item in sort:
+    #Add to the bag
+    if item[1]<= W:
+        W-=item[1]
+        tv+=item[0]
+        added.append(1)
+        
+    else:
+        x=W*1.0/item[1]*item[0]
+        tv+=x
+        added.append(round(W*1.0/item[1],2))
+        break
+print(round(tv,2),added)
