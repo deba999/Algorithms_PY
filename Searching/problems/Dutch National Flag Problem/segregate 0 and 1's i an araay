@@ -1,0 +1,108 @@
+ou are given an array of 0s and 1s in random order. Segregate 0s on left side and 1s on right side of the array. Traverse array only once.
+Input array   =  [0, 1, 0, 1, 0, 0, 1, 1, 1, 0] 
+Output array =  [0, 0, 0, 0, 0, 1, 1, 1, 1, 1] 
+
+
+MEthod1 :
+1) Count the number of 0s. Let count be C.
+2) Once we have count, we can put C 0s at the beginning and 1s at the remaining n – C positions in array.
+
+def segregate0and1(arr, n) : 
+      
+    # Counts the no of zeros in arr 
+    count = 0 
+  
+    for i in range(0, n) : 
+        if (arr[i] == 0) : 
+            count = count + 1
+  
+    # Loop fills the arr with 0 until count 
+    for i in range(0, count) : 
+        arr[i] = 0
+  
+    # Loop fills remaining arr space with 1 
+    for i in range(count, n) : 
+        arr[i] = 1
+        
+Time complexity : O(n)  but The method 1 traverses the array two times. 
+
+Method2 :
+Maintain two indexes. Initialize first index left as 0 and second index right as n-1.
+
+Do following while left < right
+a) Keep incrementing index left while there are 0s at it
+b) Keep decrementing index right while there are 1s at it
+c) If left < right then exchange arr[left] and arr[right]
+
+#sorting in a binary array
+#segrgate 0 and 1 in an array s.t first 0 and then 1
+#separting even and odd
+
+def sort(a,n):
+    l=0;h=n-1
+
+    while l<h:
+        while a[l]==0 and l<h:
+            l+=1
+        while a[h]==1 and l<h:
+            h-=1
+        if l<h:
+            a[l],a[h]=a[h],a[l]
+            l+=1
+            h-=1
+    print(*a)
+Time Complexity: O(n)
+
+Method 3:
+1. Take two pointer type0(for element 0) starting from beginning (index = 0) and type1(for element 1) starting from end (index = array.length-1).
+Initialize type0 = 0 and type1 = array.length-1
+2. It is intended to Put 1 to the right side of the array. Once it is done, then 0 will definitely towards left side of array.
+
+def sort2(a,n):
+    l=0;h=n-1
+
+    while l<h:
+        if a[l]==1:
+            a[l],a[h]=a[h],a[l]
+            h-=1
+        else:
+            l+=1
+    print(*a)
+
+    
+for _ in range(int(input())):
+    n=int(input())
+    arr=list(map(int,input().split()))
+    sort2(arr,n)
+
+
+#segregating even and odd numbers
+Another type: 
+Given an array A[], write a program that segregates even and odd numbers. 
+The program should put all even numbers first in sorted order,
+and then odd numbers in sorted order.
+
+def sort(a,n):
+    l=0;h=n-1
+
+    while l<h:
+        while a[l]%2==0 and l<h:
+            l+=1
+        while a[h]%2==1 and l<h:
+            h-=1
+        if l<h:
+            a[l],a[h]=a[h],a[l]
+            l+=1
+            h-=1
+    print(*a)
+
+def sort2(a,n):
+    l=0;h=n-1
+
+    while l<h:
+        if a[l]%2==1:
+            a[l],a[h]=a[h],a[l]
+            h-=1
+        else:
+            l+=1
+    print(*a)
