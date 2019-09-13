@@ -96,13 +96,16 @@ def sort(a,n):
             h-=1
     print(*a)
 
-def sort2(a,n):
-    l=0;h=n-1
-
-    while l<h:
-        if a[l]%2==1:
-            a[l],a[h]=a[h],a[l]
-            h-=1
-        else:
-            l+=1
-    print(*a)
+##Lomuto Partition Scheme
+def arrayEvenAndOdd(arr,n): 
+    i = -1
+    j= 0
+    while (j!=n): 
+        if (arr[j] % 2 ==0): 
+            i = i+1
+  
+            # Swapping even and odd numbers  
+            arr[i],arr[j] = arr[j],arr[i] 
+        
+        j = j+1
+      
