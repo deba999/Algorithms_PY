@@ -1,0 +1,86 @@
+Given an array with 0s,1s and 2s, sort array in increasing order. Another way to phrase this problem is sort balls with three different colors : red, blue and white, where balls of each color are placed together. This is typically know as Dutch national flag problem and algorithm to solve it is called Dutch national flag problem. Example:
+A = [0,1,0,1,1,2,0,2,0,1]
+Output = [0,0,0,0,1,1,1,1,2,2]
+
+A = [R,B,B,W,B,R,W,B,B]
+Output = [R,R,W,W,B,B,B,B]
+
+Method 1: Count
+
+def sort012(arr, n): 
+  
+    # Variables to maintain the count of 0's,  
+    # 1's and 2's in the array 
+    count0 = 0
+    count1 = 0
+    count2 = 0
+    for i in range(0,n): 
+        if (arr[i] == 0): 
+            count0=count0+1
+        if (arr[i] == 1): 
+            count1=count1+1
+        if (arr[i] == 2): 
+            count2=count2+1
+      
+  
+    # Putting the 0's in the array in starting. 
+    for i in range(0,count0): 
+        arr[i] = 0
+      
+    # Putting the 1's in the array after the 0's. 
+    for i in range( count0, (count0 + count1)) : 
+        arr[i] = 1
+      
+    # Putting the 2's in the array after the 1's 
+    for i in range((count0 + count1),n) : 
+        arr[i] = 2
+      
+    return
+    
+    #requires 2 traversals
+    ####################################################
+    Method 2: 
+    
+    def swap(arr, i1, i2):
+  temp = arr[i1]
+  arr[i1] = arr[i2]
+  arr[i2] = temp
+
+def dutchNatFlag(arr):
+  
+  low = 0
+  mid = 0
+  high = len(arr) - 1
+  
+  # one pass through the array swapping
+  # the necessary elements in place
+  while mid <= high:
+  
+    if arr[mid] == 0:
+        #at diffrenet indexes 
+        if mid>low:
+            swap(arr, low, mid)
+            low += 1
+            #mid += 1  : not requirewd : as on next iteration low==mid , will execute the else block
+        else:
+            #At same index : to avoid the unncessary swaps
+            low+=1
+            mid+=1
+        
+    elif arr[mid] == 2:
+    
+        if mid<high:
+            swap(arr, mid, high)
+            high -= 1
+        else:         # already sorted mid>high
+            break
+        
+    else:             #arr[mid] == 1:
+      mid += 1
+      
+  return arr
+  
+print( dutchNatFlag([1,0,2,0,0,1])) 
+
+
+    
