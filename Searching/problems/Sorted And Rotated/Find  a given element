@@ -5,38 +5,46 @@ def search(arr,n,k):
     h=n-1
     while l<=h:
         m=(l+h)//2
+
+        #Found atr MId
         if arr[m]==k:
-            print('Found , ',arr[m])
-            return
-        elif arr[l]<=arr[m]:
+            return m
+        #Left side is sorted
+        elif arr[l]<arr[m]:
             if k>=arr[l] and k<arr[m]:
                 h=m-1
             else:
                 l=m+1
-        else:
+        #right side is sorted
+        elif arr[l] > arr[m]:
             if k>arr[m] and k<=arr[h]:
                 l=m+1
             else:
                 h=m-1
+        #To handle duplicates
+        else: 
+            l+=1  #skip one element
 
-    print('Not Found...')
+    return -1
 
 #Recursion way
-def search(arr,l,h,k):
+def search1(arr,l,h,k):
     if l>h:
         return -1
     mid=(l+h)//2
 
     if arr[mid]==k:
         return mid
-    elif arr[l]<=arr[mid]:
+    elif arr[l]<arr[mid]:  #for an distnict element of array we can do arr[l]<=arr[m]
         if k>=arr[l] and k<arr[mid]:
             return search(arr,l,mid-1,k)
         else:
             return search(arr,mid+1,h,k)
-    else:
+    elif arr[l]>arr[m]:
         if k>arr[mid] and k<=arr[h]:
             return search(arr,mid+1,h,k)
         else:
             return search(arr,l,mid-1,k)
+    else:
+        return search(arr,l+1,h,k)  #to handle duplicates
     return -1
