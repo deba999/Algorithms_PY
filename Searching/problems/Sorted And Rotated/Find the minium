@@ -1,0 +1,104 @@
+Given a sorted array which is rotated at some unknown point, find the minimum element in that array
+Example
+INPUT :
+arr[] = {5,6,7,1,2,3,4}
+
+OUTPUT :
+The minimum element is 1
+
+In the above example, the input is the rotated sorted array ie, sorted array will be {1,2,3,4,5,6,7} and  the rotated sorted array is {5,6,7,1,2,3,4}. The output 1 is the minimum element in that array.
+
+Time Complexity: O(logn)
+
+The main idea is, the element is said to be minimum in rotated sorted array if the previous element to it is greater than it or there is no previous element(ie, no rotation)
+
+#Iteration
+def findMin(arr,l,h):
+
+    #array is not sorted
+    if arr[l]<arr[h]:
+        return arr[0]
+    if l==h:
+        return arr[l]
+
+    while l<=h:
+        m=(l+h)//2
+
+        #mid is the maximumpoint
+        if m<h and arr[m]>arr[m+1]:
+            return arr[m+1]
+
+        #mid is the minium element
+        if m>l and arr[m]<arr[m-1]:
+            return arr[m]
+        
+        #To handle duplicates
+        # This case causes O(n) time
+        #decide :which side to go to find the maxium element
+        if arr[h]>arr[m]:
+            h=m-1
+        elif arr[h]<arr[m]:
+            l=m+1
+        else:
+            h-=1
+            
+    return arr[0]
+
+''''''''
+#recursion
+def findMin(arr,l,h):
+
+    #array is not sorted
+    if arr[l]<arr[h]:
+        return arr[0]
+
+    if l==h:
+        return arr[l]
+
+    m=(l+h)//2
+
+    #mid is the maximumpoint
+    if m<h and arr[m]>arr[m+1]:
+        return arr[m+1]
+    #mid is the minium element
+    if m>l and arr[m]<arr[m-1]:
+        return arr[m]
+
+
+    #To handle duplicates
+    # This case causes O(n) time
+    if (arr[l] == arr[m] and arr[h] == arr[m]) :
+
+        return min(findMin(arr, l, m-1), findMin(arr, m+1, h))
+
+  
+    #decide :which side to go to find the maxium element
+    if arr[h]>arr[m]:
+        return findMin(arr,l,m-1)
+    else:
+        return findMin(arr,m+1,h)
+
+###################################################
+How to handle duplicates?
+It turned out that duplicates can’t be handled in O(Logn) time in all cases. 
+The special cases that cause problems are like {2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 2} and {2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2}.
+i.e leftmost element == middle element == rightmost element
+It doesn’t look possible to go to left half or right half by doing constant number of comparisons at the middle.
+
+
+So the problem with repetition can be solved in O(n) worst case.
+
+#O(n) Algo
+#For duplicates
+def findMin(arr,n):
+    if n==0:
+        return 0
+    m=arr[0]
+
+    for i in range(1,n):
+        if arr[i]<m:
+            m=arr[i]
+
+    return m
+
+'''
