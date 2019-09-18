@@ -71,6 +71,19 @@ def findMajority5(arr,n):
         if c==0:
             c=1
             maj=arr[i]
+            
+     '''
+     #We can modify above code in compact form
+             maj=0
+             c=0
+             for i in range(0,n):
+                if arr[i]==maj or c==0:
+                    c+=1
+                    maj=arr[i]
+                else:
+                    c-=1
+    
+     '''
 
     #checking if it ocurrs n//2+1 times or not
     x=arr.count(maj)
