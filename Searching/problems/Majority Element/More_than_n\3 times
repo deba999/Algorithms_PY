@@ -1,0 +1,50 @@
+#Majority element n/3 times
+
+Logic :
+1. Start with two empty candidate slots and two counters set to 0.
+
+2. for each item:
+       2.1   if it is equal to either candidate, increment the corresponding count
+       2.2   else if there is an empty slot (i.e. a slot with count 0), put it in that slot and set the count to 1
+       2.3   else reduce both counters by 1
+
+
+#Method5 Moore's Voting Algo  >>>>>>BEST ONE
+import sys
+def findMajority5(arr,n):
+    maj1=maj2=sys.maxsize
+    c1=c2=0
+
+    #Finding the Candidate
+    for i in range(0,n):
+        if arr[i]==maj1:
+            c1+=1
+        elif arr[i]==maj2:
+            c2+=1
+        elif c1==0:
+            c1=1
+            maj1=arr[i]
+        elif c2==0:
+            c2=1
+            maj2=arr[i]
+        else:
+            c1-=1
+            c2-=1
+
+    #checking if it ocurrs n//2+1 times or not
+    x=arr.count(maj1)
+    y=arr.count(maj2)
+    
+    if x>(n//2):
+        print(maj1)
+    elif y>(n/2):
+        print(maj2)
+    else:
+        print('No Majority')
+    
+
+    
+arr = [1, 2, 3, 1] 
+n = len(arr) 
+      
+findMajority5(arr, n) 
