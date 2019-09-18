@@ -30,14 +30,33 @@ def findMajority5(arr,n):
         else:
             c1-=1
             c2-=1
+     
+     '''
+     #We can modify the code to compact
+     maj1=maj2=0
+     c1=c2=0
+    #Finding the Candidate
+    for i in range(0,n):
+        
+        if (arr[i]==maj1 or c1==0) and arr[i]!=maj2:
+            c1+=1
+            maj1=arr[i]
+        elif arr[i]==maj2 or c2==0:
+            c2+=1
+            maj2=arr[i]
+        else:
+            c1-=1
+            c2-=1
+     
+     '''
 
     #checking if it ocurrs n//2+1 times or not
     x=arr.count(maj1)
     y=arr.count(maj2)
     
-    if x>(n//2):
+    if x>(n//3):
         print(maj1)
-    elif y>(n/2):
+    elif y>(n//3):
         print(maj2)
     else:
         print('No Majority')
