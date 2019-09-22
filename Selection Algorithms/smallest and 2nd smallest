@@ -1,0 +1,46 @@
+#Find the minimum and 2nd minium in optimal way
+
+#Method1
+'''
+!.   Sort the Array
+!!.  first 2 elements are the required answers
+'''
+
+#Method2
+'''
+1. Trvaerse the array and find the minimum ,let it be x
+2.Again traverse, find the minimum and it should be > x
+
+con: Traversing 2 times
+
+'''
+
+#Method3 : ONE TIME TRAVERSAL
+'''
+1) Initialize both first and second smallest as INT_MAX
+   first = second = INT_MAX
+2) Loop through all the elements.
+   a) If the current element is smaller than first, then update first 
+       and second. 
+   b) Else if the current element is smaller than second then update 
+    second
+'''
+def find(arr,n):
+    if n<2:
+        print(' -1 ')
+    import sys
+    f=s=sys.maxsize
+
+    for i in arr:
+        if i<f:
+            s=f
+            f=i
+        elif i < s and i != f:
+            s=i
+    if s==sys.maxsize:
+        print('No second smallest element')
+    else:
+        print(f,s)
+
+arr=[22, 486, 789, 721 ,191, 141, 635, 648, 326, 984, 462 ,695, 143, 631 ,192, 64 ,521, 321, 555, 539 ,143, 493, 931, 423 ,35, 686 ,309, 95 ,781 ,709, 645 ,803 ,546 ,785 ,523 ,88 ,926 ,158 ,736 ,603 ,493, 549, 297 ,987 ,531 ,841, 50, 52, 513 ,957 ,590]
+find(arr,len(arr))
