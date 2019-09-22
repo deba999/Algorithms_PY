@@ -41,6 +41,65 @@ def find(arr,n):
         print('No second smallest element')
     else:
         print(f,s)
+       
+#BEST METHOD................................................................... #Method4 : Tournament method
+
+#(Minium number of comparisions): n+logn-2 comaprisions
+'''
+1. Start with comparing elements of the n element array in odd and even positions and determining largest element of each pair. This step requires n/2 comparisons. Now you've got only n/2 elements. Continue pairwise comparisons to get n/4, n/8, ... elements. Stop when the largest element is found. This step requires a total of n/2 + n/4 + n/8 + ... + 1 = n-1 comparisons.
+
+2. During previous step, the largest element was immediately compared with log₂(n) other elements. You can determine the largest of these elements in log₂(n)-1 comparisons. That would be the second-largest number in the array.
+
+Example: array of 8 numbers [10,9,5,4,11,100,120,110].
+
+omparisons on level 1: [10,9] ->10 [5,4]-> 5, [11,100]->100 , [120,110]-->120.
+Comparisons on level 2: [10,5] ->10 [100,120]->120.
+Comparisons on level 3: [10,120]->120.
+
+Maximum is 120. It was immediately compared with: 10 (on level 3), 100 (on level 2), 110 (on level 1).
+Step 2 should find the maximum of 10, 100, and 110. Which is 110. That's the second largest element.
+'''
+
+def find1(arr,n):
+    teams=range(0,n)
+    knockout=[[] for i in teams]
+
+    while len(teams)>1:
+        newTeams=[]
+        odd_pos=len(teams)%2
+
+        for i in range(0,len(teams)-odd_pos-1,2):
+            fst=teams[i]
+            secnd=teams[i+1]
+            
+            if arr[fst]<arr[secnd]:
+                newTeams.append(fst)
+                knockout[fst].append(arr[secnd])
+            else:
+                newTeams.append(secnd)
+                knockout[secnd].append(arr[fst])
+            
+        if odd_pos==1:
+            newTeams.append(teams[i+2])
+
+        teams=newTeams
+
+
+    print('Smallest Element is :',arr[teams[0]])
+    print('nodes knocked off by smallest element: ',knockout[teams[0]])
+    
+    #nOW FIND THE SECOND SMALLEST NUMBER FROM THE KNOCKOUT LIST OF SMALLEST NUMBER
+    pos=knockout[teams[0]]
+
+    if len(pos)>0:
+        v=pos[0]
+        for i in range(1,len(pos)):
+            if v>pos[i]:
+                v=pos[i]
+
+        print('2nd SMALLEST NUMBER IS : ', v)
+                
+
 
 arr=[22, 486, 789, 721 ,191, 141, 635, 648, 326, 984, 462 ,695, 143, 631 ,192, 64 ,521, 321, 555, 539 ,143, 493, 931, 423 ,35, 686 ,309, 95 ,781 ,709, 645 ,803 ,546 ,785 ,523 ,88 ,926 ,158 ,736 ,603 ,493, 549, 297 ,987 ,531 ,841, 50, 52, 513 ,957 ,590]
 find(arr,len(arr))
