@@ -1,0 +1,95 @@
+#Finding the Maximum and minium in minium number of comparisions
+
+#Method1 :
+#Worst case: sorted in descending order; comparisions : 1+2(n-2)
+#Best case : sorted in ascending order; comparisions:  1+n-2
+
+def find(arr,n):
+    #Assuming n>1
+    max=min=0
+
+    if arr[0] >arr[1]:
+        max=arr[0]
+        min=arr[1]
+    else:
+        max=arr[1]
+        min=arr[0]
+
+    for i in range(2,n):
+        if max < arr[i]:
+            max=arr[i]
+        elif min > arr[i]:
+            min=arr[i]
+    print(max,min)
+
+#method2
+'''
+If n is a power of 2, then we can write T(n) as:   T(n) = 2T(n/2) + 2 
+After solving above recursion, we get   T(n)  = 3n/2 -2 
+Thus, solvinf this, 3n/2 -2 comparisons if n is a power of 2.
+And it does more than 3n/2 -2 comparisons if n is not a power of 2.
+'''
+def find1(arr,l,h):
+    mn=mx=0
+    if l==h:   #1 element
+        return arr[l],arr[h]
+    elif l==h+1: #2 elements
+        mn=min(arr[l],arr[h])
+        mx=max(arr[l],arr[h])
+        return mn,mx
+    else:
+        mid=(l+h)//2
+        x=find1(arr,l,mid)
+        y=find1(arr,mid+1,h)
+
+        if x[0]>y[0]:
+            mn=y[0]
+        else:
+            mn=x[0]
+
+        if x[1]<y[1]:
+            mx=y[1]
+        else:
+            mx=x[1]
+
+        return mn,mx
+
+
+#Method3 : PairWise Method
+'''
+Total number of comparisons: Different for even and odd n, see below:
+
+If n is odd:    3*(n-1)/2
+       
+If n is even:   1 Initial comparison for initializing min and max, 
+                and 3(n-2)/2 comparisons for rest of the elements  
+            =  1 + 3*(n-2)/2 = 3n/2 -2
+
+Second and third approaches make equal number of comparisons when n is a power of 2.
+In general, method 3 seems to be the best.
+'''
+def find2(arr,n):
+    mn=mx=0
+    i=0
+    #if n is odd
+    if n%2==1:
+        mn=mx=arr[0]
+        i=1
+    else:
+        mn=min(arr[0],arr[1])
+        mx=max(arr[0],arr[1])
+        i=2
+
+    for i in range(n-1):
+        if arr[i] < arr[i + 1]: 
+            mx = max(mx, arr[i + 1]) 
+            mn = min(mn, arr[i]) 
+        else: 
+            mx = max(mx, arr[i]) 
+            mn = min(mn, arr[i + 1])
+
+    print(mx,mn)
+
+    
+arr=[1000, 11, 445, 330, 3000]
+find2(arr,len(arr))
