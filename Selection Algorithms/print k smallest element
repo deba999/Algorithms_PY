@@ -1,0 +1,109 @@
+#Find the k-smallest elements in an array
+'''
+#Method1 : Similar to buuble sort
+def bubbleSort(arr,k): 
+    n = len(arr) 
+  
+    # Traverse through all array elements 
+    for i in range(k): 
+  
+        # Last i elements are already in place 
+        for j in range(0, n-i-1): 
+  
+            # traverse the array from 0 to n-i-1 
+            # Swap if the element found is greater 
+            # than the next element 
+            if arr[j] < arr[j+1] : 
+                arr[j], arr[j+1] = arr[j+1], arr[j] 
+
+
+#Method2  #SORTING
+def kLargest(arr, k): 
+    # Sort the given array arr in reverse  
+    # order. 
+    arr.sort() #For Largest :reverse=True  
+    for i in range(k): 
+        print (arr[i], end =" ")
+
+#Method 4 (Use Max Heap)
+
+1) Build a Max Heap tree in O(n)
+2) Use Extract Max k times to get k maximum elements from the Max Heap O(klogn)
+
+Time complexity: O(n + klogn)
+'''
+
+#Method5 : PARTITION METHOD
+import random
+def kthSmallest(data, k):
+#"Find the nth rank ordered clement (the least value has rank O)."
+    data = list(data)
+
+    if not 0 <= k < len(data):
+        raise ValueError('not enough clements for the given rank')
+    while True:
+        pivot= random.choice(data)
+        x=0
+       
+        pcount = 0
+        under, over = [],[]
+        uappend, oappend = under.append, over.append
+
+        for elem in range(len(data)):
+            if data[elem] < pivot:
+                uappend(data[elem])
+            elif data[elem] > pivot:
+                oappend(data[elem])
+            else:
+                pcount += 1
+                x=elem
+                
+            
+        #print(under,over,pcount)
+        if k < len(under):
+            data= under
+        elif k < len(under) + pcount:
+            return pivot,x
+        else:
+            data= over
+            k -= len(under) + pcount
+        #print(data,k)
+        #print('-------------------------------')
+
+def partition(arr,low,high): 
+    i = ( low-1 )         # index of smaller element 
+    pivot,p = kthSmallest(arr, k)    # pivot 
+    print('--------',pivot,p)
+    for j in range(low , high): 
+  
+        # If current element is smaller than the pivot 
+        if   arr[j] < pivot: 
+          
+            # increment index of smaller element 
+            i = i+1 
+            arr[i],arr[j] = arr[j],arr[i] 
+  
+    arr[i+1],arr[high] = arr[high],arr[i+1]
+    print(arr)
+    return ( i+1 )
+
+def final(arr,l,h):
+    point=partition(arr,l,h)
+    print(point)
+    
+    if k<point:
+        return final(arr,l,point-1)
+    elif k>point:
+        return final(arr,point+1,h)
+    else:
+        return point
+    
+
+arr=[2, 1,5,234,3,44, 7,6,4,5,9, 11, 12, 14,13]
+k=5
+
+https://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/
+https://www.careercup.com/question?id=5644780193185792
+x=final(arr,0,len(arr)-1)
+print(x,arr[x])
+print(arr)
