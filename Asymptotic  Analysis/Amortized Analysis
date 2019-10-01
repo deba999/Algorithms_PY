@@ -1,0 +1,26 @@
+Amortized analysis refers to determining the time-averaged running time for a sequence of operations. it involves taking total cost of operation in the algo over the extended period of time.
+
+It is different from what is commonly referred to as average case analysis, because amortized analysis does not make any assumption about the distribution of the data values, whereas average case analysis assumes the data are not "bad" (e.g., some sorting algorithms do well on "average" over all input orderings but very badly on certain input orderings). 
+
+That is, amortized analysis is a worst case analysis, but for a sequence of operations, rather than for individual operations.  It uses the fact that we are analyzing a sequence to "spread out" the costs (think of insurance where everyone can pay a relatively modest amount despite some catastrophic costs).
+
+The motivation for amortized analysis is to better understand the running time of certain techniques, where standard worst case analysis provides an overly pessimistic bound.  Amortized analysis generally applies to a method that consists of a sequence of operations, where the vast majority of the operations are cheap, but some of the operations are expensive.  If we can show that the expensive operations are particularly rare we can "charge them" to the cheap operations, and only bound the cheap operations. 
+
+The general approach is to assign an artificial cost to each operation in the sequence, such that the total of the artificial costs for the sequence of operations bounds total of the real costs for the sequence.  This artificial cost is called the amortized cost of an operation. In order to analyze the running time, the amortized cost thus is a correct way of understanding the overall running time — but note that particular operations can still take longer so it is not a way of bounding the running time of any individual operation in the sequence.
+
+Three approaches are commonly used for amortized analysis, and have been termed:
+   * The aggregate method,  :  where the total running time for a sequence of operations is analyzed.
+   * The accounting (or banker's) method, where we impose an extra charge on inexpensive operations and use it to pay for expensive operations later on.
+   * The potential (or physicist's) method, in which we derive a potential function characterizing the amount of extra work we can do in each step. This potential either increases or decreases with each successive operation, but cannot be negative.
+   
+   Example 1 :
+The claim that hash tables have O(1) expected performance for lookup and insert is based on the assumption that the number of elements stored in the table is comparable to the number of buckets. If a hash table has many more elements than buckets, the number of elements stored at each bucket will become large. For instance, with a constant number of buckets and O(n) elements, the lookup time is O(n) and not O(1).
+
+The solution to this problem is to increase the size of the table when the number of elements in the table gets too large compared to the size of the table. If we let the load factor be the ratio of the number of elements to the number of buckets, when the load factor exceeds some small constant (typically 2 for chaining and .75 for linear probing), we allocate a new table, typically double the size of the old table, and rehash all the elements into the new table. This operation is not constant time, but rather linear in the number of elements at the time the table is grown.
+
+The linear running time of a resizing operation is not as much of a problem as it might sound (although it can be an issue for some real-time computing systems). If the table is doubled in size every time it is needed, then the resizing operation occurs with exponentially decreasing frequency. As a consequence, the insertion of n elements into an empty array takes only O(n) time in all, including the cost of resizing. We say that the insertion operation has O(1) amortized run time because the time required to insert an element is O(1) on average, even though some elements trigger a lengthy rehashing of all the elements of the hash table.
+
+
+#https://www.cs.cornell.edu/courses/cs3110/2013sp/lectures/lec21-amortized/lec21.html
+#https://programming.guide/amortized-time-complexity-analysis.html
+#https://www.geeksforgeeks.org/analysis-algorithm-set-5-amortized-analysis-introduction/
