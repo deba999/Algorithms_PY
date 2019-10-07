@@ -1,0 +1,75 @@
+
+Arranging Coins
+
+You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins.
+
+Given n, find the total number of full staircase rows that can be formed.
+
+n is a non-negative integer and fits within the range of a 32-bit signed integer.
+
+Example 1:
+
+n = 5
+
+The coins can form the following rows:
+¤
+¤ ¤
+¤ ¤
+
+Because the 3rd row is incomplete, we return 2.
+Example 2:
+
+n = 8
+
+The coins can form the following rows:
+¤
+¤ ¤
+¤ ¤ ¤
+¤ ¤
+
+Because the 4th row is incomplete, we return 3.
+
+def arrangeCoins(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        i=1
+        s=0
+        
+        while s<=n :
+            s+=i
+            i+=1
+        
+        return max(i-2,0)
+ 
+ 
+ def guessNumber(n):
+        def check(mid, n):
+            return mid*(mid+1) <= 2*n
+
+        left, right = 1, n
+        while left <= right:
+            mid = left + (right-left)//2
+            print(mid)
+            if not check(mid, n):
+                right = mid-1
+            else:
+                left = mid+1
+                
+            print(left,right)
+        return right
+
+print(guessNumber(5))
+
+'''
+Find x that satisfy the condition: 1+2+3+4+5+6+7+...+x ≤ n
+Summing the AP for first x terms, S = x(x+1)/2 ≤ n
+Solving quadratic, discarding -ve soln, x = (sqrt(8n+1) - 1)/2
+'''
+
+        
+ int way2(int n) {
+        return sqrt(2 * (long)n + 1 / 4.0) - 1 / 2.0;
+    }       
+        
