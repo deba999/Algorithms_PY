@@ -58,7 +58,7 @@ def arrangeCoins(self, n):
                 left = mid+1
                 
             print(left,right)
-        return right
+        return left-1
 
 print(guessNumber(5))
 
