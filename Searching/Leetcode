@@ -1,0 +1,92 @@
+29. Divide Two Integers
+
+Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.
+Return the quotient after dividing dividend by divisor.
+The integer division should truncate toward zero.
+
+Example 1:Input: dividend = 10, divisor = 3   Output: 3
+Example 2: Input: dividend = 7, divisor = -3  Output: -2
+
+solution 1:   O(a)
+def divide(dividend, divisor):  
+  
+    # Calculate sign of divisor i.e., 
+    # sign will be negative only iff 
+    # either one of them is negative 
+    # otherwise it will be positive 
+    sign = -1 if ((dividend < 0) ^  (divisor < 0)) else 1
+      
+    # Update both divisor and 
+    # dividend positive 
+    dividend = abs(dividend) 
+    divisor = abs(divisor) 
+      
+    # Initialize the quotient 
+    quotient = 0
+    while (dividend >= divisor):  
+        dividend -= divisor 
+        quotient += 1
+            
+    return sign * quotient 
+    
+solution 2: log(a)
+def divide(self, dividend: int, divisor: int) -> int:
+        positive = (0 if((dividend < 0)^(divisor < 0)) else 1)
+        
+        dividend, divisor = abs(dividend), abs(divisor)
+        res = 0
+
+        while dividend >= divisor:
+            
+            p=0
+
+            while dividend >= (divisor << p):
+                p+=1
+                
+            #print(p)
+            res+=1<<(p-1)
+            dividend-=divisor<<(p-1)
+            #print(divisor,dividend,res)
+            
+        if not positive:
+            res = -res
+        return min(max(-2147483648, res), 2147483647)
+
+
+solution 3:
+def divide( dividend, divisor):
+        '''
+        if(divisor==0): return 2147483647
+        elif(divisor==-1 and dividend == -2147483648):
+            return 2147483647
+        '''
+
+        positive = (0 if((dividend < 0)^(divisor < 0)) else 1)
+        dividend, divisor = abs(dividend), abs(divisor)
+
+        res = 0
+        c,sub=1,divisor
+        #print(''dividend,sub,c,res'')
+        while dividend >= divisor:
+            
+            if dividend >= sub:
+                dividend-=sub
+                res+=c
+                sub<<=1
+                c<<=1
+            else:
+                sub>>=1
+                c>>=1
+            print(dividend,sub,c,res)
+            
+        if not positive:
+            res = -res
+        return res
+        #return min(max(-2147483648, res), 2147483647)
+
+print(divide(13,3))
+
+EDGE CASE:
+
+if (dividend == Integer.MIN_VALUE && divisor == -1)
+    return Integer.MAX_VALUE;
